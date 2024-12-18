@@ -34,6 +34,6 @@ Génération procédurale d'arbre en utilisant le L-system : [Ressources](https:
 ### Introduction
 Génération procédurale d'une ville en utilisant le L-system : [Ressources](https://cgl.ethz.ch/Downloads/Publications/Papers/2001/p_Par01.pdf). Générez dans un premier temps les routes de votre ville puis les cadastres des bâtiments pour ensuite générer procéduralement le bâtiment.
 ### Contributeurs
-- **Git master** : Renaud MACHECOURT-BOURGEOIS
-- **Developpers** : Renaud MACHECOURT-BOURGEOIS - Anna SARBIEWSKI - Ivan ROCQUE - Reyane REDJEM
-- **Supports** : Enzo CAUSSE
+- **Git master** : [Renaud MACHECOURT-BOURGEOIS](https://itschocapic.github.io/)
+- **Developpers** : [Renaud MACHECOURT-BOURGEOIS](https://itschocapic.github.io/) - Anna SARBIEWSKI - Ivan ROCQUE - Reyane REDJEM
+- **Supports** : Enzo MARTINEZ
