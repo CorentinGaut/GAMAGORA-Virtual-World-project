@@ -7,9 +7,9 @@ Projet final du cours Mondes Virtuels de l'année 2024/2025. Les étudiants sont
 Génération procédurale de terrain en utilisant le bruit de perlin : [Ressources](https://www.youtube.com/watch?v=wbpMiKiSKm8&list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3&index=1). Le terrain doit être le plus réalistique possible en laissant une zone plane pour la génération procédurale de ville.
 
 ### Contributeurs
-- **Git master** : Arthur PRADIER
-- **Developpers** : Arthur PRADIER - [Najib EL KHADIR](https://najibxy.github.io/) - [Enzo MARTINEZ](https://dev-portfolio-enzo-martinezs-projects.vercel.app/) - Evan DUBOIS
-- **Supports** : Augustin GUYOT - Adjamé TELLIER-ROZEN
+- **Git master** : [Arthur PRADIER](https://www.arthur-pradier.tech/)
+- **Developpers** : [Arthur PRADIER](https://www.arthur-pradier.tech/) - [Najib EL KHADIR](https://najibxy.github.io/) - [Enzo MARTINEZ](https://dev-portfolio-enzo-martinezs-projects.vercel.app/) - Evan DUBOIS
+- **Supports** : Augustin GUYOT - [Adjamé TELLIER-ROZEN](https://adjametelroz.wixsite.com/portfolio-ame)
 
 ---
 ## Génération de routes :car:
@@ -18,7 +18,7 @@ Génération procédurale de routes en utilisant les algorithmes de plus court c
 
 ### Contributeurs
 - **Git master** : Flavien GONIN
-- **Developpers** : Flavien GONIN - Alex CLORENNEC - Marwan AIT ADDI - Adjamé TELLIER-ROZEN - Anis HAMMOUCHE
+- **Developpers** : Flavien GONIN - Alex CLORENNEC - Marwan AIT ADDI - [Adjamé TELLIER-ROZEN](https://adjametelroz.wixsite.com/portfolio-ame) - Anis HAMMOUCHE
 
 ---
 ## Génération d'arbres :deciduous_tree:
