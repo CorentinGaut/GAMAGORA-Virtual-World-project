@@ -1,5 +1,5 @@
 # GAMAGORA-Virtual_World-Project
-Projet final du cours Mondes Virtuels de l'année 2024/2025. Les étudiants sont répartis en 4 groupes qui abordent différent aspect de la génération procédurale dans le monde du jeux vidéo. L'objectif est de créer une map complète à la GTA VI qui peut être utilisée dans un futur jeu. 
+Projet final du cours Mondes Virtuels de l'année 2024/2025. Les étudiants sont répartis en 4 groupes qui abordent différent aspect de la génération procédurale dans le monde du jeux vidéo. L'objectif est de créer une map complète à la GTA VI qui peut être utilisée dans un futur jeu. 2022.3.45f
 
 ---
 ## Génération de terrain :mount_fuji:
