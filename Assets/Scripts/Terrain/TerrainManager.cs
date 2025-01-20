@@ -49,6 +49,12 @@ namespace Terrain
         [Range(1f, 10f)]
         public float mountainTop = 1f;  //Petite ref (tu l'as ?)
 
+        [Header("plane zone")]
+        public Vector3 planeCenter;
+        public float planeInnerRadius;
+        public float planeOuterRadius;
+        public float planeInterpolationK;
+    
         private Terrain terrainGenerator;
 
         void Awake()
@@ -60,7 +66,7 @@ namespace Terrain
         public void GenerateTerrain()
         {
             terrainGenerator = new Terrain(width, height, nx, ny, seed, octaves, lacunarity, gain, scale, maxHeight, 
-                isIsland, islandScale, mountainScale, mountainTop);
+                isIsland, islandScale, mountainScale, mountainTop, planeCenter, planeInnerRadius, planeOuterRadius, planeInterpolationK);
         }
 
         public void UpdateModel()
