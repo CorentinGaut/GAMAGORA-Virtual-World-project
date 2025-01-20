@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TerrainShader
-  m_Shader: {fileID: -6465566751694194690, guid: 613142bc6cb2b784e8d54c5c5658c13c, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 613142bc6cb2b784e8d54c5c5658c13c,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -60,5 +61,5 @@ Material:
     - _Ground: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
     - _Rock: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
     - _Sand: {r: 0.6037736, g: 0.36859748, b: 0.19081523, a: 1}
-    - _Water: {r: 0.1760413, g: 0.619891, b: 0.8679245, a: 1}
+    - _Water: {r: 0.3773585, g: 0.2176677, b: 0.097899616, a: 1}
   m_BuildTextureStacks: []
