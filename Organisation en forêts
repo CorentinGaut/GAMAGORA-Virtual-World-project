@@ -1,0 +1,4 @@
+Idées possibles pour mettre en oeuvre l'étape 6 :
+- Faire une texture avec du bruit (exemple : Perlin) qui servira de masque pour faire apparâitre des arbres
+- Commencer par faire apparaitre un arbre aléatoirement dans une case, puis en faire apparaitre dans les cases adjacentes selon une certaine probabilité
+  (Exemple : https://www.youtube.com/watch?v=tMkpjjjDRYI&t=1076s)
