@@ -9,10 +9,13 @@ class Langage
 	
 	private Dictionary <char, string> grammaire = new Dictionary <char, string> ();
 	private string mot;
-	
+
+
+	/* Constructeur */
 	
 	public Langage (string [] regles, string axiome = "")
 	{
+		// Définition de la grammaire dans un dictionnaire
 		for (int indice = 0; indice < regles. Length; indice ++)
 		{
 			string resultat = regles [indice];
@@ -22,20 +25,26 @@ class Langage
 		
 		this. changerMot (axiome);
 	}
-	
+
+
+	/* Affichage */
 	
 	public override string ToString ()
 	{
 		return this. mot;
 	}
-	
+
+
+	/* Affecte un nouveau mot de départ */
 	
 	public void changerMot (string axiome)
 	{
 		estMot (axiome);
 		this. mot = axiome;
 	}
-	
+
+
+	/* Itère nbIterations fois */
 	
 	public void iterer (int nbIterations = 1)
 	{
@@ -44,7 +53,9 @@ class Langage
 			this. iterer ();
 		}
 	}
+
 	
+	/* Change le mot actuel une fois selon les règles préétablies */
 	
 	public void iterer ()
 	{
@@ -62,7 +73,9 @@ class Langage
 		}
 		this. mot = nouveau;
 	}
-	
+
+
+	/* Vérifie s'il n'y a pas de lettre inconnue à cet alphabet */
 	
 	private static bool estMot (string mot)
 	{
@@ -93,6 +106,8 @@ class Tests
 {
 	public static void Main (string[] args)
 	{
+		// Tests sur le langage
+		
 		var chene1 = new Langage (new String [] {"B", "ACA", "C"});
 		chene1. changerMot ("AA");
 		chene1. iterer (5);
