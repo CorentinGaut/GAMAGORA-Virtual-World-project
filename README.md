@@ -9,7 +9,7 @@ Génération procédurale de terrain en utilisant le bruit de perlin : [Ressourc
 ### Contributeurs
 - **Git master** : [Arthur PRADIER](https://www.arthur-pradier.tech/)
 - **Developpers** : [Arthur PRADIER](https://www.arthur-pradier.tech/) - [Najib EL KHADIR](https://najibxy.github.io/) - [Enzo MARTINEZ](https://dev-portfolio-enzo-martinezs-projects.vercel.app/) - Evan DUBOIS
-- **Supports** : Augustin GUYOT - [Adjamé TELLIER-ROZEN](https://adjametelroz.wixsite.com/portfolio-ame)
+- **Supports** : [Augustin GUYOT](https://www.linkedin.com/in/augustin-guyot/) - [Adjamé TELLIER-ROZEN](https://adjametelroz.wixsite.com/portfolio-ame)
 
 ---
 ## Génération de routes :car:
@@ -17,16 +17,16 @@ Génération procédurale de terrain en utilisant le bruit de perlin : [Ressourc
 Génération procédurale de routes en utilisant les algorithmes de plus court chemin (A* ou Dijsktra): [Ressources](https://www.youtube.com/watch?v=-L-WgKMFuhE). Générez à la fois des grands axes routiers et des chemins de montagnes. Les axes routiers auront comme contraintes de passer que sur des zones ou le terrain n'a pas une forte courbure. 
 
 ### Contributeurs
-- **Git master** : Flavien GONIN
-- **Developpers** : Flavien GONIN - Alex CLORENNEC - Marwan AIT ADDI - [Adjamé TELLIER-ROZEN](https://adjametelroz.wixsite.com/portfolio-ame) - Anis HAMMOUCHE
+- **Git master** : [Flavien GONIN](https://katsukifirestar.github.io/Portfolio/)
+- **Developpers** : [Flavien GONIN](https://katsukifirestar.github.io/Portfolio/) - Alex CLORENNEC - Marwan AIT ADDI - [Adjamé TELLIER-ROZEN](https://adjametelroz.wixsite.com/portfolio-ame) - Anis HAMMOUCHE
 
 ---
 ## Génération d'arbres :deciduous_tree:
 ### Introduction
 Génération procédurale d'arbre en utilisant le L-system : [Ressources](https://www.youtube.com/watch?v=E1B4UoSQMFw&list=PLQu8TxiWYLxID80vTywVWjaloCyytE2gB&index=2). Proposez 3 types d'arbres différents pour ajouter de la diversité. Ces arbres devront être ensuite placés de manière aléatoire sur le terrain pour créer des forêts. 
 ### Contributeurs
-- **Git master** : Augustin GUYOT
-- **Developpers** : Augustin GUYOT - Enzo CAUSSE - Saïd AIT AHMAD - Doha BITAQA - Salma SABBAR
+- **Git master** : [Augustin GUYOT](https://www.linkedin.com/in/augustin-guyot/)
+- **Developpers** : [Augustin GUYOT](https://www.linkedin.com/in/augustin-guyot/) - Enzo CAUSSE - Saïd AIT AHMAD - Doha BITAQA - Salma SABBAR
 - **Supports** : [Najib EL KHADIR](https://najibxy.github.io/)
   
 ---
