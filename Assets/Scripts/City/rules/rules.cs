@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LSystem {
@@ -8,9 +6,18 @@ namespace LSystem {
     {
         public string letter;
         [SerializeField] private string[] results = null;
+        [SerializeField] private bool randomResult = false;
+
+        public bool randomIngoreRuleModifier = true;
+        [Range(0, 1)] public float chanceToIgnoreRule = 0.3f;
 
         public string GetResult()
         {
+            if (randomResult)
+            {
+                int randomIndex = Random.Range(0, results.Length);
+                return results[randomIndex];
+            }
             return results[0];
         }
     }

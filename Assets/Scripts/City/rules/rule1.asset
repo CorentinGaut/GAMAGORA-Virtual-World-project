@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb888af7e416baf499824d81ec38e545, type: 3}
   m_Name: rule1
   m_EditorClassIdentifier: 
-  letter: A
+  letter: F
   results:
-  - AB
+  - '[+F][-F]'
+  - '[+F]F[-F]'
+  - '[-F]F[+F]'
+  randomResult: 1
+  randomIngoreRuleModifier: 1
+  chanceToIgnoreRule: 0.3

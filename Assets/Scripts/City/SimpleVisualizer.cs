@@ -1,11 +1,8 @@
 using LSystem;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Visualizer : MonoBehaviour
+public class SimpleVisualizer : MonoBehaviour
 {
     public LSystemGenerator lsystem;
     List<Vector3> positions = new List<Vector3>();
@@ -16,7 +13,17 @@ public class Visualizer : MonoBehaviour
     private int angle = 90;
 
     public int Length{
-        get { if(length>0) { return length; } else { return 1; } }
+        get 
+        { 
+            if(length > 0) 
+            { 
+                return length; 
+            } 
+            else 
+            { 
+                return 1; 
+            } 
+        }
         set => length = value;
     }
     
@@ -41,37 +48,38 @@ public class Visualizer : MonoBehaviour
             EncodingLetters encoding = (EncodingLetters)letter;
             switch (encoding)
             {
-                case EncodingLetters.save:
-                    savePoints.Push(new AgentParameter()
+                case EncodingLetters.save: 
+                    savePoints.Push(new AgentParameter
                     {
                         position = currentPosition,
                         direction = direction,
-                        length = Length
+                        length = length
                     });
                     break;
-                case EncodingLetters.load:
-                    if (savePoints.Count > 0)
+                case EncodingLetters.load: 
+                    if(savePoints.Count > 0)
                     {
-                        var AgentParameter = savePoints.Pop();
-                        currentPosition = AgentParameter.position;
-                        direction = AgentParameter.direction;
-                        Length = AgentParameter.length;
+                        var agentParameter = savePoints.Pop();
+                        currentPosition = agentParameter.position;
+                        direction = agentParameter.direction;
+                        Length = agentParameter.length;
                     }
                     else
                     {
-                        throw new System.Exception("No save point to load");
+                        throw new System.Exception("Dont have save point in our stack");
                     }
                     break;
-                case EncodingLetters.forward:
-                    tempPosition = currentPosition + direction * length;
+                case EncodingLetters.draw: 
+                    tempPosition = currentPosition;
+                    currentPosition += direction * length;
                     DrawLine(tempPosition, currentPosition, Color.red);
-                    Length += 2;
+                    length -= 2;
                     positions.Add(currentPosition);
                     break;
-                case EncodingLetters.right:
+                case EncodingLetters.turnRight: 
                     direction = Quaternion.AngleAxis(angle, Vector3.up) * direction;
                     break;
-                case EncodingLetters.left:
+                case EncodingLetters.turnLeft:
                     direction = Quaternion.AngleAxis(-angle, Vector3.up) * direction;
                     break;
                 default:
@@ -90,9 +98,9 @@ public class Visualizer : MonoBehaviour
         unknown = '1',
         save = '[',
         load = ']',
-        forward = 'F',
-        right = '+',
-        left = '-'
+        draw = 'F',
+        turnRight = '+',
+        turnLeft = '-'
     }
 
     private void DrawLine(Vector3 start, Vector3 end, Color c)

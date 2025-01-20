@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LSystem
 {
-    public class AgentParameter : MonoBehaviour
+    public class AgentParameter
     {
         public Vector3 position, direction;
         public int length;

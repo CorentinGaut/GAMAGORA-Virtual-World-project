@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
-using TMPro;
 using UnityEngine;
 
 
@@ -27,6 +24,7 @@ namespace LSystem {
             }
             return GrowRecursive(word);
         }
+
         private string GrowRecursive(string word, int iterationIndex = 0) {
             if (iterationIndex >= iterationLimit)
             {
@@ -48,6 +46,13 @@ namespace LSystem {
             foreach (var rule in rules) { 
                 if(rule.letter == letter.ToString())
                 {
+                    if (rule.randomIngoreRuleModifier && iterationIndex > 1)
+                    {
+                        if (UnityEngine.Random.value < rule.chanceToIgnoreRule)
+                        {
+                            return;
+                        }
+                    }
                     newWord.Append(GrowRecursive(rule.GetResult(),iterationIndex+1));
                     
                 }
