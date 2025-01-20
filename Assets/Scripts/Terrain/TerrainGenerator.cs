@@ -121,6 +121,12 @@ namespace Terrain
             ComputeNormalMap();
         }
 
+        float planeSmoothFunction(float x, float k)
+        {
+            float a = 0.5f * Mathf.Pow(2.0f * ((x < 0.5f) ? x : 1.0f - x), k);
+            return (x < 0.5f) ? a : 1.0f - a;
+        }
+
         float GetHeight(int x, int y)
         {
             return data[GetIndex(x, y)];
