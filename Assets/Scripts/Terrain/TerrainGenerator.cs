@@ -40,7 +40,8 @@ namespace Terrain
         private int erosionRadius;
     
         public Terrain(float width, float height, int nx, int ny, int seed, int octaves, float lacunarity,
-            float gain, float scale, float maxHeight)
+            float gain, float scale, float maxHeight, Vector3 planeCenter, 
+            float planeInnerRadius, float planeOuterRadius, float planeInterpolationK)
         : base(nx, ny)
         {
             maxSlope = 0;
@@ -62,13 +63,28 @@ namespace Terrain
             for(int j = 0; j < ny; j++)
             for (int i = 0; i < nx; i++)
             {
-                data[j * nx + i] = (noise.GetNoise(i, j) + 1f) * .5f;
+                    float distance = Vector3.Distance(planeCenter, new Vector3(i, 0, j));
+                    if (distance < planeInnerRadius)
+                        data[j * nx + i] = 0.0f;
+                    else if (distance < planeOuterRadius)
+                    {
+                        data[j * nx + i] = Mathf.Lerp(0.0f, (noise.GetNoise(i, j) + 1f) * .5f,
+                            planeSmoothFunction((distance - planeInnerRadius)/(planeOuterRadius - planeInnerRadius), planeInterpolationK));
+                    }
+                    else
+                        data[j * nx + i] = (noise.GetNoise(i, j) + 1f) * .5f;
             }
 
             slopeMap = new ScalarField(nx, ny);
             normalMap = new Vector3[nx * ny];
             ComputeSlopeMap();
             ComputeNormalMap();
+        }
+
+        float planeSmoothFunction(float x, float k)
+        {
+            float a = 0.5f * Mathf.Pow(2.0f * ((x < 0.5f) ? x : 1.0f - x), k);
+            return (x < 0.5f) ? a : 1.0f - a;
         }
 
         float GetHeight(int x, int y)

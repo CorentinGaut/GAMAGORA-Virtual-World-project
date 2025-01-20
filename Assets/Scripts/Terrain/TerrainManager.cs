@@ -38,6 +38,12 @@ namespace Terrain
         public float depositionSpeed = .02f;
         public float directionInertia = .1f;
         public float gravity = 20f;
+
+        [Header("plane zone")]
+        public Vector3 planeCenter;
+        public float planeInnerRadius;
+        public float planeOuterRadius;
+        public float planeInterpolationK;
     
         private Terrain terrainGenerator;
 
@@ -49,7 +55,7 @@ namespace Terrain
 
         public void GenerateTerrain()
         {
-            terrainGenerator = new Terrain(width, height, nx, ny, seed, octaves, lacunarity, gain, scale, maxHeight);
+            terrainGenerator = new Terrain(width, height, nx, ny, seed, octaves, lacunarity, gain, scale, maxHeight, planeCenter, planeInnerRadius, planeOuterRadius, planeInterpolationK);
         }
 
         public void UpdateModel()
