@@ -1,6 +1,6 @@
-(Said)     • modéliser les éléments de façon paramétrable (longueur, diamètre, résolution, etc.)
-(Enzo)     • coder la génération aléatoire récursive influant sur les paramètres
-(Enzo)     X associer chaque élément à une lettre (ex. : A ← tronc, B ← branche, C ← feuille)
-           X trouver les mots de départ qui engendrent de bons types d'arbres (au moins 3)
-(Augustin) • générer des arbres aléatoirement sur le monde (sur la surface du sol)
-           X les organiser en forêts
+(Said)         • modéliser les éléments de façon paramétrable (longueur, diamètre, résolution, etc.)
+(Enzo)         • coder la génération aléatoire récursive influant sur les paramètres
+(Enzo)         X associer chaque élément à une lettre (ex. : A ← tronc, B ← branche, C ← feuille)
+(Doha & Salma) • trouver les mots de départ qui engendrent de bons types d'arbres (au moins 3)
+(Augustin)     • générer des arbres aléatoirement sur le monde (sur la surface du sol)
+(Doha & Salma) • les organiser en forêts
