@@ -93,16 +93,6 @@ public class SimpleVisualizer : MonoBehaviour
         }
     }
 
-    public enum EncodingLetters 
-    { 
-        unknown = '1',
-        save = '[',
-        load = ']',
-        draw = 'F',
-        turnRight = '+',
-        turnLeft = '-'
-    }
-
     private void DrawLine(Vector3 start, Vector3 end, Color c)
     {
         GameObject line = new GameObject("Line");

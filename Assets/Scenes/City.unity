@@ -259,6 +259,59 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1066763165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1066763166}
+  - component: {fileID: 1066763167}
+  m_Layer: 0
+  m_Name: RoadHelper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1066763166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066763165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.1833992, y: -3.7996664, z: 2.0017943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1066763167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066763165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5c03dd546fcdf47b3817ac9210fe9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadStraight: {fileID: 1902133473773644130, guid: 4cc96138ef8c728428d8abdcc0b6f9b1,
+    type: 3}
+  roadCorner: {fileID: 9167836805613001921, guid: 50e7e7a62a765c34ca6c22f34f0c28e1,
+    type: 3}
+  road3way: {fileID: 5962866701861012061, guid: 315ae3df12eb2cd48be4923c16f3547a,
+    type: 3}
+  road4way: {fileID: 9024991216101018872, guid: 42168f3369da5d741b4848f69149e780,
+    type: 3}
+  roadEnd: {fileID: 1901475907271895716, guid: d293aa27ae6eca54c97ea18b5e7892a0, type: 3}
 --- !u!1 &1118413041
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +321,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1118413042}
-  - component: {fileID: 1118413043}
+  - component: {fileID: 1118413044}
+  - component: {fileID: 1118413045}
   m_Layer: 0
   m_Name: Visualizer
   m_TagString: Untagged
@@ -291,7 +345,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1118413043
+--- !u!114 &1118413044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,6 +353,21 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118413041}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c034ae4eaaee9a946a4f81cb97bcbaa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lsystem: {fileID: 1513662892}
+  prefab: {fileID: 0}
+  lineMaterial: {fileID: 0}
+--- !u!114 &1118413045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118413041}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a6d41aa79a90e547b3538d086f3edb1, type: 3}
   m_Name: 
@@ -480,3 +549,4 @@ SceneRoots:
   - {fileID: 1700995035}
   - {fileID: 1513662893}
   - {fileID: 1118413042}
+  - {fileID: 1066763166}
