@@ -1,19 +1,20 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(GraphGenerator))]
-public class GraphGeneratorEditor : Editor
+namespace Graph
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(GraphGenerator))]
+    public class GraphGeneratorEditor : Editor
     {
-        DrawDefaultInspector();
-
-        GraphGenerator generator = (GraphGenerator) target;
-        if (GUILayout.Button("Generate edge in line renderer"))
+        public override void OnInspectorGUI()
         {
-            generator.GenerateLineRenderer();
+            DrawDefaultInspector();
+    
+            GraphGenerator generator = (GraphGenerator) target;
+            if (GUILayout.Button("Generate edge in line renderer"))
+            {
+                generator.GenerateLineRenderer();
+            }
         }
     }
-
-    
 }

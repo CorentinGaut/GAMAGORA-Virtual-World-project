@@ -4,6 +4,16 @@
     {
         public float[] data;
         protected int nx, ny;
+        
+        public int NX
+        {
+            get => nx;
+        }
+
+        public int NY
+        {
+            get => ny;
+        }
 
         public ScalarField(int nx, int ny)
         {

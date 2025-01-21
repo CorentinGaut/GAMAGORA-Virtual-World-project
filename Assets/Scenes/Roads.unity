@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3f2901de6366445b18b442f51efec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  land: {fileID: 322885840}
+  terrainGenerator: {fileID: 1195335735}
   indPoint: 0
   baseColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &386661353
@@ -410,9 +410,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
