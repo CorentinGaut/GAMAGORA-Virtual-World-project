@@ -35,15 +35,15 @@ public class Graph
 		Edges.Add(edge);
 	}
 
-	public List<Vector3> GetNeighbor(Vector3 point)
+	public List<int> GetNeighbor(int indPoint)
 	{
-		List<Vector3> neighbors = new List<Vector3>();
+		List<int> neighbors = new();
 		for (int i = 0; i < Edges.Count; i++)
 		{
-			if (Edges[i].From.x == point.x && Edges[i].From.y == point.y && Edges[i].From.z == point.z)
+			if (Edges[i].From == indPoint)
 			{
 				neighbors.Add(Edges[i].To);	
-			}else if (Edges[i].To.x == point.x && Edges[i].To.y == point.y && Edges[i].To.z == point.z)
+			}else if (Edges[i].To == indPoint)
 			{
 				neighbors.Add(Edges[i].From);
 			}
