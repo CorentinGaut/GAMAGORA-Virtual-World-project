@@ -419,7 +419,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.027439117
+        value: 0.0030555725
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -503,8 +503,8 @@ MonoBehaviour:
   width: 10
   height: 10
   maxHeight: 1
-  nx: 10
-  ny: 10
+  nx: 1000
+  ny: 1000
   seed: 1337
   octaves: 8
   lacunarity: 2

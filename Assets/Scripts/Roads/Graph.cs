@@ -27,13 +27,6 @@ namespace Graph
     
     	public void AddEdge(Edge edge)
     	{
-    		foreach (Edge e in Edges)
-    		{
-    			if ((e.From == edge.From && e.To == edge.To) || (e.To == edge.From && e.From == edge.To))
-    			{
-    				return;
-    			}
-    		}
     		Edges.Add(edge);
     	}
     

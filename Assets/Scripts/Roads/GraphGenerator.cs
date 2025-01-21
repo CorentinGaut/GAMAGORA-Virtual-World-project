@@ -29,32 +29,31 @@ namespace Graph
     		
     		//Get all the vertices of the map and remove all the vertices where position.y < 0.3 (Water)
     		graph = new Graph();
-    		Debug.Log("Nb de points : " + land.data.Length);
     		for (int i = 0; i < land.data.Length; i++)
 		    {
 			    Vector3 v = land.IndexToWorld(i); 
-			    
-			    Debug.Log(v);
 			    graph.AddPoint(v);
     		}
-    		Debug.Log("Nb de points : " + graph.Position.Count);
     		
     		//Create all the edge for the graph for the direct neighbor
 		    for (int i = 0; i < graph.Position.Count - 1; i++)
 		    {
+			    bool next = (i + 1) % land.NX != 0;
+			    bool nextY = (i + land.NX) / land.NY != land.NY;
+			    
 			    if (graph.Position[i].y <= .3f)
 				    continue;
 			    
-			    if ((i + 1) % land.NX != 0 && graph.Position[i + 1].y > .3f)
+			    if (next && graph.Position[i + 1].y > .3f)
 				    graph.AddEdge(new(i, i+1));
 			    
-			    if ((i + land.NX) / land.NY != land.NY && graph.Position[i + land.NX].y > .3f)
+			    if (nextY && graph.Position[i + land.NX].y > .3f)
 				    graph.AddEdge(new(i, i + land.NX));
 			    
-			    if ((i + 1) % land.NX != 0 && (i + land.NX) / land.NY != land.NY && graph.Position[i + 1 + land.NX].y > .3f)
+			    if (next && nextY && graph.Position[i + 1 + land.NX].y > .3f)
 				    graph.AddEdge(new(i, i + 1 + land.NX));
 			    
-			    if ((i + land.NX) / land.NY != land.NY && i % land.NX != 0 && graph.Position[i - 1 + land.NX].y > .3f)
+			    if (nextY && i % land.NX != 0 && graph.Position[i - 1 + land.NX].y > .3f)
 				    graph.AddEdge(new(i, i - 1 + land.NX));
 		    }
 		}
