@@ -122,6 +122,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &325856520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 325856522}
+  - component: {fileID: 325856521}
+  m_Layer: 0
+  m_Name: StructureHelper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &325856521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325856520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b97ed107f8c65b45b0fbeaf9339f0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2507707691550815495, guid: 59ffc13d9fb598240ac517fe6fb6fd9c, type: 3}
+--- !u!4 &325856522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325856520}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.047933, y: -2.0161614, z: -0.74267066}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &634570954
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,8 +403,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lsystem: {fileID: 1513662892}
-  prefab: {fileID: 0}
-  lineMaterial: {fileID: 0}
+  roadHelper: {fileID: 1066763167}
+  structurHelper: {fileID: 325856521}
 --- !u!114 &1118413045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,8 +451,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rules:
   - {fileID: 11400000, guid: bb8cfbb267fd12448a7bf4fb694e0768, type: 2}
-  rootSentence: '[F]--F'
-  iterationLimit: 2
+  rootSentence: '[F]--F[+F]-F'
+  iterationLimit: 10
 --- !u!4 &1513662893
 Transform:
   m_ObjectHideFlags: 0
@@ -550,3 +595,4 @@ SceneRoots:
   - {fileID: 1513662893}
   - {fileID: 1118413042}
   - {fileID: 1066763166}
+  - {fileID: 325856522}

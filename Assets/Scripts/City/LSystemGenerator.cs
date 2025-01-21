@@ -9,7 +9,7 @@ namespace LSystem {
         public rules[] rules;
 
         public string rootSentence;
-        [Range(0,10)] public int iterationLimit = 1;
+        [Range(0,100)] public int iterationLimit = 1;
 
         private void Start()
         {
@@ -23,6 +23,21 @@ namespace LSystem {
                 word = rootSentence;
             }
             return GrowRecursive(word);
+        }
+
+        public static string GenerateRandomSentence(int length)
+        {
+            char[] symbols = { '[', ']', 'F', '+', '-' };
+            System.Text.StringBuilder sentence = new System.Text.StringBuilder();
+
+            // Génération aléatoire des caractères
+            for (int i = 0; i < length; i++)
+            {
+                char randomSymbol = symbols[UnityEngine.Random.Range(0, symbols.Length)];
+                sentence.Append(randomSymbol);
+            }
+
+            return sentence.ToString();
         }
 
         private string GrowRecursive(string word, int iterationIndex = 0) {

@@ -10,6 +10,7 @@ namespace LSystem
         List<Vector3> positions = new List<Vector3>();
         
         public RoadHelper roadHelper;
+        public StructurHelper structurHelper;
 
         private int length = 8;
         private int angle = 90;
@@ -90,6 +91,7 @@ namespace LSystem
                 }
             }
             roadHelper.FixedRoad();
+            structurHelper.PlaceStructureAroundRoad(roadHelper.GetRoadPosition());
         }
     }
 }

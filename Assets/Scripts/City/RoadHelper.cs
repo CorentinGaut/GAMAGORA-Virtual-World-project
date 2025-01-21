@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,6 +12,11 @@ namespace LSystem
         public GameObject roadStraight, roadCorner, road3way, road4way, roadEnd;
         Dictionary<Vector3Int, GameObject> roadDictionary = new Dictionary<Vector3Int, GameObject>();
         HashSet<Vector3Int> fixedRoadCandidates = new HashSet<Vector3Int>();
+
+        public List<Vector3Int> GetRoadPosition()
+        {
+            return roadDictionary.Keys.ToList();
+        }
 
         public void PlaceStreetPositions(Vector3 startPosition, Vector3Int direction, int length)
         {
