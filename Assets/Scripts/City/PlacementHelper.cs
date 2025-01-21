@@ -29,7 +29,7 @@ namespace LSystem
             return neighbourDirections;
         }
 
-        internal static Vector3Int GetOffsetFromDirection(Direction direction)
+        public static Vector3Int GetOffsetFromDirection(Direction direction)
         {
             switch (direction)
             {
@@ -41,6 +41,25 @@ namespace LSystem
                     return Vector3Int.left;
                 case Direction.Right:
                     return Vector3Int.right;
+                default:
+                    break;
+            }
+
+            throw new System.Exception("No direction such as " + direction);
+        }
+
+        public static Direction GetReverseDirection(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Up:
+                    return Direction.Down;
+                case Direction.Down:
+                    return Direction.Up;
+                case Direction.Left:
+                    return Direction.Right;
+                case Direction.Right:
+                    return Direction.Left;
                 default:
                     break;
             }
