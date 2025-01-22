@@ -154,21 +154,21 @@ MonoBehaviour:
   buildingTypes:
   - prefabs:
     - {fileID: 3962440082643158057, guid: 5689e4726bc2a8a48bcc36605fba918e, type: 3}
-    sizeRequired: 3
+    sizeRequired: 2
     quantity: 1
-    QuantityAlreadyPlaced: 0
+    quantityAlreadyPlaced: 0
   - prefabs:
     - {fileID: 2507707691550815495, guid: 59ffc13d9fb598240ac517fe6fb6fd9c, type: 3}
     - {fileID: 3866452111178995711, guid: 62dd89dfe4948b744ac32fe5d0249467, type: 3}
     sizeRequired: 1
     quantity: 5
-    QuantityAlreadyPlaced: 0
+    quantityAlreadyPlaced: 0
   - prefabs:
     - {fileID: 6611407531028321825, guid: e4e3476b5a3e23a479a803b108d04c9c, type: 3}
     - {fileID: 6841383266756804668, guid: 32e5c407a77f7744c866fb16abd37898, type: 3}
     sizeRequired: 1
     quantity: -1
-    QuantityAlreadyPlaced: 0
+    quantityAlreadyPlaced: 0
 --- !u!4 &325856522
 Transform:
   m_ObjectHideFlags: 0
@@ -178,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 325856520}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.047933, y: -2.0161614, z: -0.74267066}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -347,7 +347,7 @@ Transform:
   m_GameObject: {fileID: 1066763165}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1833992, y: -3.7996664, z: 2.0017943}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -401,7 +401,7 @@ Transform:
   m_GameObject: {fileID: 1118413041}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7705631, y: -1.5239029, z: 3.5496483}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lsystem: {fileID: 1513662892}
   roadHelper: {fileID: 1066763167}
-  structurHelper: {fileID: 325856521}
+  structureHelper: {fileID: 325856521}
 --- !u!114 &1118413045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,8 +468,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rules:
   - {fileID: 11400000, guid: bb8cfbb267fd12448a7bf4fb694e0768, type: 2}
-  rootSentence: '[F]--F[+F]-F'
+  rootSentence: '[F]--F[+F]-F++[F]'
   iterationLimit: 10
+  randomIgnoreRuleModifier: 1
+  chanceToIgnoreRule: 0.3
 --- !u!4 &1513662893
 Transform:
   m_ObjectHideFlags: 0
@@ -479,7 +481,7 @@ Transform:
   m_GameObject: {fileID: 1513662891}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7705631, y: -1.5239029, z: 3.5496483}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

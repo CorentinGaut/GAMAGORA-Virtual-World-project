@@ -5,12 +5,12 @@ using UnityEngine;
 public class SimpleVisualizer : MonoBehaviour
 {
     public LSystemGenerator lsystem;
-    List<Vector3> positions = new List<Vector3>();
+    private readonly List<Vector3> positions = new();
     public GameObject prefab;
     public Material lineMaterial;
 
     private int length = 8;
-    private int angle = 90;
+    private readonly int angle = 90;
 
     public int Length{
         get 

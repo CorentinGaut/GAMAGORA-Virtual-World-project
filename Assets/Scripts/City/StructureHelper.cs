@@ -6,10 +6,10 @@ using UnityEngine.UIElements;
 
 namespace LSystem
 {
-    public class StructurHelper : MonoBehaviour
+    public class StructureHelper : MonoBehaviour
     {
         public BuildingType[] buildingTypes;
-        public Dictionary<Vector3Int, GameObject> structuresDictionary = new Dictionary<Vector3Int, GameObject>();
+        public Dictionary<Vector3Int, GameObject> structuresDictionary = new();
 
         public void PlaceStructureAroundRoad(List<Vector3Int> roadPosition)
         {
@@ -26,7 +26,7 @@ namespace LSystem
                 switch (freeSpot.Value)
                 {
                     case Direction.Up:
-                        rotation = Quaternion.Euler(0,90,0); 
+                        rotation = Quaternion.Euler(0, 90, 0);
                         break;
                     case Direction.Down:
                         rotation = Quaternion.Euler(0, -90, 0);
@@ -41,23 +41,32 @@ namespace LSystem
                     if (buildingTypes[i].quantity == -1)
                     {
                         var building = SpawnPrefab(buildingTypes[i].GetPrefab(), freeSpot.Key, rotation);
-                        structuresDictionary.Add(freeSpot.Key, building);
+                        if (!structuresDictionary.ContainsKey(freeSpot.Key))
+                        {
+                            structuresDictionary.Add(freeSpot.Key, building);
+                        }
                         break;
                     }
                     if (buildingTypes[i].IsBuildingAvailable())
                     {
                         if (buildingTypes[i].sizeRequired > 1)
                         {
-                            var halfSize = Mathf.CeilToInt(buildingTypes[i].sizeRequired / 2.0f);
+                            var halfSize = Mathf.FloorToInt(buildingTypes[i].sizeRequired / 2.0f);
                             List<Vector3Int> tempPositionsBlocked = new List<Vector3Int>();
-                            if(VerifyIfBuildingFits(halfSize, freeEstateSpots, freeSpot, ref tempPositionsBlocked))
+                            if (VerifyIfBuildingFits(halfSize, freeEstateSpots, freeSpot, blockedPosition, ref tempPositionsBlocked))
                             {
                                 blockedPosition.AddRange(tempPositionsBlocked);
                                 var building = SpawnPrefab(buildingTypes[i].GetPrefab(), freeSpot.Key, rotation);
-                                structuresDictionary.Add(freeSpot.Key, building);
-                                foreach(var pos in tempPositionsBlocked)
+                                if (!structuresDictionary.ContainsKey(freeSpot.Key))
                                 {
-                                    structuresDictionary.Add(pos, building);
+                                    structuresDictionary.Add(freeSpot.Key, building);
+                                }
+                                foreach (var pos in tempPositionsBlocked)
+                                {
+                                    if (!structuresDictionary.ContainsKey(pos))
+                                    {
+                                        structuresDictionary.Add(pos, building);
+                                    }
                                 }
                                 break;
                             }
@@ -65,9 +74,12 @@ namespace LSystem
                         else
                         {
                             var building = SpawnPrefab(buildingTypes[i].GetPrefab(), freeSpot.Key, rotation);
-                            structuresDictionary.Add(freeSpot.Key, building);
+                            if (!structuresDictionary.ContainsKey(freeSpot.Key))
+                            {
+                                structuresDictionary.Add(freeSpot.Key, building);
+                            }
                         }
-                            break;
+                        break;
                     }
                 }
             }
@@ -76,23 +88,25 @@ namespace LSystem
         private bool VerifyIfBuildingFits(
             int halfSize, 
             Dictionary<Vector3Int, Direction> freeEstateSpots, 
-            KeyValuePair<Vector3Int, Direction> freeSpot, 
+            KeyValuePair<Vector3Int, Direction> freeSpot,
+            List<Vector3Int> blockedPosition, 
             ref List<Vector3Int> tempPositionsBlocked)
         {
             Vector3Int direction = Vector3Int.zero;
             if (freeSpot.Value == Direction.Down || freeSpot.Value == Direction.Up)
             {
-                direction = Vector3Int.zero;
+                direction = Vector3Int.right;
             }
             else
             {
                 direction = new Vector3Int(0, 0, 1);
             }
-            for (int i = 0; i < halfSize; i++)
+            for (int i = 0; i <= halfSize; i++)
             {
                 var pos1 = freeSpot.Key + direction * i;
                 var pos2 = freeSpot.Key - direction * i;
-                if (!freeEstateSpots.ContainsKey(pos1) || !freeEstateSpots.ContainsKey(pos2))
+                if (!freeEstateSpots.ContainsKey(pos1) || !freeEstateSpots.ContainsKey(pos2) || 
+                    blockedPosition.Contains(pos1) || blockedPosition.Contains(pos2))
                 {
                     return false;
                 }

@@ -1,17 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace LSystem
 {
     public class RoadHelper : MonoBehaviour
     {
         public GameObject roadStraight, roadCorner, road3way, road4way, roadEnd;
-        Dictionary<Vector3Int, GameObject> roadDictionary = new Dictionary<Vector3Int, GameObject>();
-        HashSet<Vector3Int> fixedRoadCandidates = new HashSet<Vector3Int>();
+        private readonly Dictionary<Vector3Int, GameObject> roadDictionary = new();
+        private readonly HashSet<Vector3Int> fixedRoadCandidates = new();
 
         public List<Vector3Int> GetRoadPosition()
         {

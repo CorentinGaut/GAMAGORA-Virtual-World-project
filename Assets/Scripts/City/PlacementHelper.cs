@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +28,7 @@ namespace LSystem
             return neighbourDirections;
         }
 
-        public static Vector3Int GetOffsetFromDirection(Direction direction)
+        internal static Vector3Int GetOffsetFromDirection(Direction direction)
         {
             switch (direction)
             {
@@ -45,7 +44,7 @@ namespace LSystem
                     break;
             }
 
-            throw new System.Exception("No direction such as " + direction);
+            throw new Exception("No direction such as " + direction);
         }
 
         public static Direction GetReverseDirection(Direction direction)
@@ -64,7 +63,7 @@ namespace LSystem
                     break;
             }
 
-            throw new System.Exception("No direction such as " + direction);
+            throw new Exception("No direction such as " + direction);
         }
     }
 }

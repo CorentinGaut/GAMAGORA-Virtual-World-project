@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LSystem
@@ -11,11 +9,11 @@ namespace LSystem
         [SerializeField] private GameObject[] prefabs;
         public int sizeRequired;
         public int quantity;
-        public int QuantityAlreadyPlaced;
+        public int quantityAlreadyPlaced;
 
         public GameObject GetPrefab()
         {
-            QuantityAlreadyPlaced++;
+            quantityAlreadyPlaced++;
             if(prefabs.Length > 1)
             {
                 var random = UnityEngine.Random.Range(0, prefabs.Length);
@@ -26,12 +24,12 @@ namespace LSystem
 
         public bool IsBuildingAvailable()
         {
-            return QuantityAlreadyPlaced < quantity;
+            return quantityAlreadyPlaced < quantity;
         }
 
         public void Reset()
         {
-            QuantityAlreadyPlaced = 0;
+            quantityAlreadyPlaced = 0;
         }
     }
 }

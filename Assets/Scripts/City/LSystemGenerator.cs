@@ -6,10 +6,13 @@ using UnityEngine;
 namespace LSystem {
     public class LSystemGenerator : MonoBehaviour
     {
-        public rules[] rules;
+        public Rule[] rules;
 
         public string rootSentence;
         [Range(0,100)] public int iterationLimit = 1;
+
+        public bool randomIgnoreRuleModifier = true;
+        [Range(0, 1)] public float chanceToIgnoreRule = 0.3f;
 
         private void Start()
         {
@@ -25,20 +28,20 @@ namespace LSystem {
             return GrowRecursive(word);
         }
 
-        public static string GenerateRandomSentence(int length)
-        {
-            char[] symbols = { '[', ']', 'F', '+', '-' };
-            System.Text.StringBuilder sentence = new System.Text.StringBuilder();
+        //public static string GenerateRandomSentence(int length)
+        //{
+        //    char[] symbols = { '[', ']', 'F', '+', '-' };
+        //    System.Text.StringBuilder sentence = new System.Text.StringBuilder();
 
-            // Génération aléatoire des caractères
-            for (int i = 0; i < length; i++)
-            {
-                char randomSymbol = symbols[UnityEngine.Random.Range(0, symbols.Length)];
-                sentence.Append(randomSymbol);
-            }
+        //    // Génération aléatoire des caractères
+        //    for (int i = 0; i < length; i++)
+        //    {
+        //        char randomSymbol = symbols[UnityEngine.Random.Range(0, symbols.Length)];
+        //        sentence.Append(randomSymbol);
+        //    }
 
-            return sentence.ToString();
-        }
+        //    return sentence.ToString();
+        //}
 
         private string GrowRecursive(string word, int iterationIndex = 0) {
             if (iterationIndex >= iterationLimit)
@@ -61,9 +64,9 @@ namespace LSystem {
             foreach (var rule in rules) { 
                 if(rule.letter == letter.ToString())
                 {
-                    if (rule.randomIngoreRuleModifier && iterationIndex > 1)
+                    if (randomIgnoreRuleModifier && iterationIndex > 1)
                     {
-                        if (UnityEngine.Random.value < rule.chanceToIgnoreRule)
+                        if (UnityEngine.Random.value < chanceToIgnoreRule)
                         {
                             return;
                         }

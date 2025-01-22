@@ -7,13 +7,13 @@ namespace LSystem
     public class Visualizer : MonoBehaviour
     {
         public LSystemGenerator lsystem;
-        List<Vector3> positions = new List<Vector3>();
+        private readonly List<Vector3> positions = new();
         
         public RoadHelper roadHelper;
-        public StructurHelper structurHelper;
+        public StructureHelper structureHelper;
 
         private int length = 8;
-        private int angle = 90;
+        private readonly int angle = 90;
 
         public int Length
         {
@@ -91,7 +91,7 @@ namespace LSystem
                 }
             }
             roadHelper.FixedRoad();
-            structurHelper.PlaceStructureAroundRoad(roadHelper.GetRoadPosition());
+            structureHelper.PlaceStructureAroundRoad(roadHelper.GetRoadPosition());
         }
     }
 }
