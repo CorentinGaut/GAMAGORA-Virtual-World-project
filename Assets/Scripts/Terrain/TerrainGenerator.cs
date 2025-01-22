@@ -181,8 +181,8 @@ namespace Terrain
 
         Vector3 PointInWorld(int index)
         {
-            float x = index % nx;
-            float z = index / ny;
+            float x = index % (nx + 1);
+            float z = index / (ny + 1);
             return new Vector3(x, data[index], z);
         }
 
@@ -191,12 +191,12 @@ namespace Terrain
             return GetIndex(x / width * nx, y / height * ny);
         }
 
-        Vector3 IndexToWorld(int index)
+        public Vector3 IndexToWorld(int index)
         {
             int x = index % nx; // Column
             int z = index / nx; // Row
 
-            return new Vector3((float)x / nx * width, data[index], (float)z / ny * height);
+            return new Vector3((float)x / (nx - 1) * width, data[index], (float)z / (ny - 1) * height);
         }
     
         public Mesh GenerateTerrain()

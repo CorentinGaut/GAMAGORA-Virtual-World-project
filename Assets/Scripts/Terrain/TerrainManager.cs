@@ -41,6 +41,11 @@ namespace Terrain
     
         private Terrain terrainGenerator;
 
+        public Terrain TerrainGenerator
+        {
+            get => terrainGenerator;
+        }
+
         void Awake()
         {
             GenerateTerrain();
