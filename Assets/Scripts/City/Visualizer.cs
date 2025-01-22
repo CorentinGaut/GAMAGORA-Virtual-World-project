@@ -12,7 +12,7 @@ namespace LSystem
         public RoadHelper roadHelper;
         public StructureHelper structureHelper;
 
-        private int length = 8;
+        [SerializeField][Range(0,100)]private int length = 8;
         private readonly int angle = 90;
 
         public int Length

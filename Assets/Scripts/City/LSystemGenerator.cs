@@ -9,7 +9,7 @@ namespace LSystem {
         public Rule[] rules;
 
         public string rootSentence;
-        [Range(0,100)] public int iterationLimit = 1;
+        [Range(0,10)] public int iterationLimit = 1;
 
         public bool randomIgnoreRuleModifier = true;
         [Range(0, 1)] public float chanceToIgnoreRule = 0.3f;
