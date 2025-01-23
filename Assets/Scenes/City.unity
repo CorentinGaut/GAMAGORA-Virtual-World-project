@@ -331,6 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1066763166}
   - component: {fileID: 1066763167}
+  - component: {fileID: 1066763168}
   m_Layer: 0
   m_Name: RoadHelper
   m_TagString: Untagged
@@ -374,6 +375,20 @@ MonoBehaviour:
   road4way: {fileID: 9024991216101018872, guid: 42168f3369da5d741b4848f69149e780,
     type: 3}
   roadEnd: {fileID: 1901475907271895716, guid: d293aa27ae6eca54c97ea18b5e7892a0, type: 3}
+--- !u!114 &1066763168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066763165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2847fef6d42146499cd95efbb4692df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roads: []
+  roadHelper: {fileID: 1066763167}
 --- !u!1 &1118413041
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +437,8 @@ MonoBehaviour:
   lsystem: {fileID: 1513662892}
   roadHelper: {fileID: 1066763167}
   structureHelper: {fileID: 325856521}
+  roadManager: {fileID: 1066763168}
+  length: 15
 --- !u!114 &1118413045
 MonoBehaviour:
   m_ObjectHideFlags: 0

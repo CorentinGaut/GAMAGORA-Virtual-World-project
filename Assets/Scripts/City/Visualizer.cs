@@ -11,6 +11,7 @@ namespace LSystem
         
         public RoadHelper roadHelper;
         public StructureHelper structureHelper;
+        public RoadManager roadManager;
 
         [SerializeField][Range(0,100)]private int length = 8;
         private readonly int angle = 90;
@@ -90,8 +91,8 @@ namespace LSystem
                         break;
                 }
             }
-            roadHelper.FixedRoad();
             structureHelper.PlaceStructureAroundRoad(roadHelper.GetRoadPosition());
+            roadManager.SetUp();
         }
     }
 }
