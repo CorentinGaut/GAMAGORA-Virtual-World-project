@@ -40,7 +40,7 @@ public class BezierRoadGenerator : MonoBehaviour
     {
         _tracer = new RoadTracer(_gen.graph, _gen.land);
 
-        pointsList = _tracer.Trace(250, 7455);
+        pointsList = _tracer.Trace(250, 70000);
         
         GenerateRoads();
     }
@@ -75,7 +75,7 @@ public class BezierRoadGenerator : MonoBehaviour
     void GenerateRoads()
     {
 
-        for (int i = 1; i < pointsList.Count; i += 2)
+        for (int i = 1; i < pointsList.Count; i += 3)
         {
             if (pointsList.Count - i > 4)
             {

@@ -656,8 +656,8 @@ MonoBehaviour:
   width: 10
   height: 10
   maxHeight: 1
-  nx: 100
-  ny: 100
+  nx: 300
+  ny: 300
   seed: 1337
   octaves: 8
   lacunarity: 2
