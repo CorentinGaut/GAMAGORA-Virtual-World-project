@@ -4,7 +4,7 @@
     {
         public float[] data;
         protected int nx, ny;
-
+        
         public ScalarField(int nx, int ny)
         {
             this.nx = nx;

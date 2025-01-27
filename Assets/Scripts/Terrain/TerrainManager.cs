@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -29,7 +30,7 @@ namespace Terrain
         public float scale = 1f;
         public MapType mapType;
 
-        [Header("hydraulic erosion")] 
+        [Header("Hydraulic erosion")] 
         public int erosionSteps = 100;
         public float soilCapacity = 10f;
         public float minSlope = .05f;
@@ -38,7 +39,16 @@ namespace Terrain
         public float depositionSpeed = .02f;
         public float directionInertia = .1f;
         public float gravity = 20f;
-    
+
+        [Header("Island Parameters")]
+        public bool isIsland = false;
+        [Range(300, 1500)]
+        public int islandScale = 300;
+        [Range(300, 1500)]
+        public int mountainScale = 300;
+        [Range(1f, 10f)]
+        public float mountainTop = 1f;  //Petite ref (tu l'as ?)
+
         private Terrain terrainGenerator;
 
         void Awake()
@@ -49,7 +59,8 @@ namespace Terrain
 
         public void GenerateTerrain()
         {
-            terrainGenerator = new Terrain(width, height, nx, ny, seed, octaves, lacunarity, gain, scale, maxHeight);
+            terrainGenerator = new Terrain(width, height, nx, ny, seed, octaves, lacunarity, gain, scale, maxHeight, 
+                isIsland, islandScale, mountainScale, mountainTop);
         }
 
         public void UpdateModel()
@@ -58,6 +69,7 @@ namespace Terrain
             terrainObject.GetComponent<MeshRenderer>().sharedMaterial.mainTexture = terrainGenerator.GenerateTexture();
         }
 
+        // Texturing the map
         public void UpdateTexture()
         {
             if(terrainGenerator == null)
@@ -82,6 +94,7 @@ namespace Terrain
             }
         }
 
+        // Erosion on the Terrain
         public void Erode()
         {
             terrainGenerator.HydraulicErosion(erosionSteps,

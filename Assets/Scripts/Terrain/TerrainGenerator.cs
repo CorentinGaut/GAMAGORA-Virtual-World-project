@@ -22,7 +22,7 @@ namespace Terrain
             }
         }
         
-        // terrain datas
+        // Terrain datas
         private ScalarField slopeMap;
         private Vector3[] normalMap;
         //private float[] slope;
@@ -40,9 +40,10 @@ namespace Terrain
         private int erosionRadius;
     
         public Terrain(float width, float height, int nx, int ny, int seed, int octaves, float lacunarity,
-            float gain, float scale, float maxHeight)
+            float gain, float scale, float maxHeight, bool isIsland, int islandScale, int mountainScale, float mountainTop)
         : base(nx, ny)
         {
+            // Variable attribution
             maxSlope = 0;
             this.width = width;
             this.height = height;
@@ -50,6 +51,7 @@ namespace Terrain
             erosionBrushIndices = new float[nx * ny][];
             erosionBrushWeights = new float[nx * ny][];
         
+            // Noise Map
             noise = new FastNoiseLite();
             noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             noise.SetFractalType(FastNoiseLite.FractalType.FBm);
@@ -59,11 +61,59 @@ namespace Terrain
             noise.SetFractalGain(gain);
             noise.SetFrequency(scale / nx);
 
-            for(int j = 0; j < ny; j++)
-            for (int i = 0; i < nx; i++)
+            
+            //Island Part
+            if (isIsland)
             {
-                data[j * nx + i] = (noise.GetNoise(i, j) + 1f) * .5f;
+                int centerIndex = Mathf.RoundToInt(ny / 2 * nx + nx / 2);
+                Vector3 centerPoint = PointInWorld(centerIndex);
+                float maxSloapValue = 0;
+                int indexXmaxSloap = 0;
+                int indexYmaxSloap = 0;
+
+                for (int j = 0; j < ny; j++)
+                for (int i = 0; i < nx; i++)
+                {
+
+                    Vector3 currentPoint = PointInWorld(j * nx + i);
+                    float distance = Vector3.Distance(currentPoint, centerPoint);
+                        
+                    float ratio = 1 - (distance / islandScale);
+
+                    if (ratio < 0)
+                        ratio = 0;
+
+                    data[j * nx + i] = (noise.GetNoise(i, j) + 1f) * .5f * ratio;
+
+                    if (data[j * nx + i] > maxSloapValue)
+                    {
+                        maxSloapValue = data[j * nx + i];
+                        indexXmaxSloap = i; 
+                        indexYmaxSloap = j;
+                    }
+                }
+
+                for (int j = 0; j < ny; j++)
+                for (int i = 0; i < nx; i++)
+                {
+                    Vector3 mountainPoint = PointInWorld(indexYmaxSloap * nx + indexXmaxSloap);
+                    Vector3 currentPoint = PointInWorld(j * nx + i);
+                    float distance = Vector3.Distance(currentPoint, mountainPoint);
+                    float ratio = 1 - (distance / mountainScale);
+
+                    data[j * nx + i] *= ratio * mountainTop;
+                }
             }
+            else
+            {
+                // Height Map
+                for (int j = 0; j < ny; j++)
+                for (int i = 0; i < nx; i++)
+                {
+                    data[j * nx + i] = (noise.GetNoise(i, j) + 1f) * .5f;
+                }
+            }
+
 
             slopeMap = new ScalarField(nx, ny);
             normalMap = new Vector3[nx * ny];
