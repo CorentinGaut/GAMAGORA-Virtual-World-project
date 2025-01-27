@@ -28,21 +28,6 @@ namespace LSystem {
             return GrowRecursive(word);
         }
 
-        //public static string GenerateRandomSentence(int length)
-        //{
-        //    char[] symbols = { '[', ']', 'F', '+', '-' };
-        //    System.Text.StringBuilder sentence = new System.Text.StringBuilder();
-
-        //    // Génération aléatoire des caractères
-        //    for (int i = 0; i < length; i++)
-        //    {
-        //        char randomSymbol = symbols[UnityEngine.Random.Range(0, symbols.Length)];
-        //        sentence.Append(randomSymbol);
-        //    }
-
-        //    return sentence.ToString();
-        //}
-
         private string GrowRecursive(string word, int iterationIndex = 0) {
             if (iterationIndex >= iterationLimit)
             {
@@ -64,58 +49,22 @@ namespace LSystem {
             foreach (var rule in rules) { 
                 if(rule.letter == letter.ToString())
                 {
-                    if (randomIgnoreRuleModifier && iterationIndex > 1)
-                    {
-                        if (UnityEngine.Random.value < chanceToIgnoreRule)
-                        {
-                            return;
-                        }
-                    }
-                    newWord.Append(GrowRecursive(rule.GetResult(),iterationIndex+1));
-                    
+                    //if (randomIgnoreRuleModifier && iterationIndex > 1)
+                    //{
+                    //    if (UnityEngine.Random.value < chanceToIgnoreRule)
+                    //    {
+                    //        return;
+                    //    }
+                    //}
+                    //newWord.Append(GrowRecursive(rule.GetResult(),iterationIndex+1));
+
+
+                    // Remove the original letter if replaced
+                    newWord.Length--; // Critical fix
+                    newWord.Append(GrowRecursive(rule.GetResult(), iterationIndex + 1));
+                    break; // Prevent multiple rule matches
                 }
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//caca

@@ -154,18 +154,26 @@ MonoBehaviour:
   buildingTypes:
   - prefabs:
     - {fileID: 3962440082643158057, guid: 5689e4726bc2a8a48bcc36605fba918e, type: 3}
-    sizeRequired: 2
+    sizeRequired: 3
     quantity: 1
     quantityAlreadyPlaced: 0
   - prefabs:
     - {fileID: 2507707691550815495, guid: 59ffc13d9fb598240ac517fe6fb6fd9c, type: 3}
     - {fileID: 3866452111178995711, guid: 62dd89dfe4948b744ac32fe5d0249467, type: 3}
+    - {fileID: 3866452111178995711, guid: 62dd89dfe4948b744ac32fe5d0249467, type: 3}
     sizeRequired: 1
-    quantity: 5
+    quantity: 250
     quantityAlreadyPlaced: 0
   - prefabs:
     - {fileID: 6611407531028321825, guid: e4e3476b5a3e23a479a803b108d04c9c, type: 3}
     - {fileID: 6841383266756804668, guid: 32e5c407a77f7744c866fb16abd37898, type: 3}
+    sizeRequired: 1
+    quantity: 180
+    quantityAlreadyPlaced: 0
+  - prefabs:
+    - {fileID: 6611407531028321825, guid: e4e3476b5a3e23a479a803b108d04c9c, type: 3}
+    - {fileID: 6841383266756804668, guid: 32e5c407a77f7744c866fb16abd37898, type: 3}
+    - {fileID: 2507707691550815495, guid: 59ffc13d9fb598240ac517fe6fb6fd9c, type: 3}
     sizeRequired: 1
     quantity: -1
     quantityAlreadyPlaced: 0
@@ -438,7 +446,7 @@ MonoBehaviour:
   roadHelper: {fileID: 1066763167}
   structureHelper: {fileID: 325856521}
   roadManager: {fileID: 1066763168}
-  length: 15
+  length: 16
 --- !u!114 &1118413045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,11 +492,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rules:
-  - {fileID: 11400000, guid: bb8cfbb267fd12448a7bf4fb694e0768, type: 2}
-  rootSentence: '[F]--F[+F]-F++[F]'
-  iterationLimit: 10
+  - {fileID: 11400000, guid: 66e7682f58b04bd45aa2e1dc3030a05f, type: 2}
+  - {fileID: 11400000, guid: bf1662e0ed4d17541be3d3c5308491b7, type: 2}
+  rootSentence: '[X]-[X]-[X]-[X]'
+  iterationLimit: 8
   randomIgnoreRuleModifier: 1
-  chanceToIgnoreRule: 0.3
+  chanceToIgnoreRule: 0.203
 --- !u!4 &1513662893
 Transform:
   m_ObjectHideFlags: 0
