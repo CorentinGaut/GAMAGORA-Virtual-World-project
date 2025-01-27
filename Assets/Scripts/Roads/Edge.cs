@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class Edge
+namespace Roads
 {
-	public int From { get; set; }
-	public int To { get; set; }
+    public class Edge
+    {
+        public int From { get; set; }
+        public int To { get; set; }
 
-	public Edge(int from, int to)
-	{
-		From = from;
-		To = to;
-	}
+        public Edge(int from, int to)
+        {
+            From = from;
+            To = to;
+        }
+    }
 }

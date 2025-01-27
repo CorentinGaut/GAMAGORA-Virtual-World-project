@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Terrain;
+using UnityEngine.Events;
 
-namespace Graph
+namespace Roads
 {
 	public class GraphGenerator : MonoBehaviour
     {
-    	public Graph graph;
-    	
-    	[SerializeField] 
+        public Graph      graph;
+        public UnityEvent onGraphFilled;
+
+        [SerializeField] 
     	private GameObject terrainGenerator;
     	
     	[Header("Debug graph")]
@@ -17,10 +19,14 @@ namespace Graph
     	[SerializeField] 
     	private Color baseColor;
 
-	    private Terrain.Terrain land;
-    	
-    	
-    	private void Start()
+	    public Terrain.Terrain land;
+
+        private void Awake()
+        {
+            onGraphFilled = new();            
+        }
+
+        private void Start()
     	{
 		    land = terrainGenerator.GetComponent<TerrainManager>().TerrainGenerator;
 		    
@@ -28,15 +34,15 @@ namespace Graph
     		GetComponent<LineRenderer>().endColor = baseColor;
     		
     		//Get all the vertices of the map and remove all the vertices where position.y < 0.3 (Water)
-    		graph = new Graph();
+    		graph = new Graph(land.data.Length);
     		for (int i = 0; i < land.data.Length; i++)
 		    {
 			    Vector3 v = land.IndexToWorld(i); 
-			    graph.AddPoint(v);
+			    graph.AddPoint(i, v);
     		}
     		
     		//Create all the edge for the graph for the direct neighbor
-		    for (int i = 0; i < graph.Position.Count - 1; i++)
+		    for (int i = 0; i < graph.Position.Length - 1; i++)
 		    {
 			    bool next = (i + 1) % land.NX != 0;
 			    bool nextY = (i + land.NX) / land.NY != land.NY;
@@ -56,6 +62,8 @@ namespace Graph
 			    if (nextY && i % land.NX != 0 && graph.Position[i - 1 + land.NX].y > .3f)
 				    graph.AddEdge(new(i, i - 1 + land.NX));
 		    }
+
+            onGraphFilled.Invoke();
 		}
     
     	public void GenerateLineRenderer()

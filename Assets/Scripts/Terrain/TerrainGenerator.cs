@@ -158,7 +158,7 @@ namespace Terrain
             }
         }
 
-        float GetSlope(int x, int y)
+        public float GetSlope(int x, int y)
         {
             return GetGradient(x, y).magnitude;
         }
@@ -174,7 +174,7 @@ namespace Terrain
             return (int)y * nx + (int)x;
         }
 
-        Vector2 ReverseIndex(int index)
+        public Vector2 ReverseIndex(int index)
         {
             return new Vector2(index % nx, index / nx);
         }
@@ -186,7 +186,7 @@ namespace Terrain
             return new Vector3(x, data[index], z);
         }
 
-        int WorldToIndex(float x, float y)
+        public int WorldToIndex(float x, float y)
         {
             return GetIndex(x / width * nx, y / height * ny);
         }

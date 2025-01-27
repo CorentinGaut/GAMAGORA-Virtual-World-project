@@ -1,28 +1,29 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-namespace Graph
+namespace Roads
 {
 	public class Graph
     {
-    	public List<Vector3> Position {get; set;}
-    	public List<Edge> Edges {get; set;}
-    
-    	public Graph()
-    	{
-    		Position = new List<Vector3>();
+    	public Vector3[] Position {get; set;}
+    	public List<Edge> Edges { get; set; }
+
+        public Graph(int size)
+        {
+            Position = new Vector3[size];
     		Edges = new List<Edge>();
     	}
     
-    	public Graph(List<Vector3> position, List<Edge> edges)
+    	public Graph(Vector3[] position, List<Edge> edges)
     	{
     		Position = position;
     		Edges = edges;
     	}
-    	
-    	public void AddPoint(Vector3 point)
-    	{
-    		Position.Add(point);
+
+        public void AddPoint(int index, Vector3 point)
+        {
+            Position[index] = point;
     	}
     
     	public void AddEdge(Edge edge)

@@ -7,14 +7,14 @@ namespace Roads
 {
     public class RoadTracer
     {
-        public class Node : IComparer<Node>
+        public class Node : IComparable<Node>, IComparer<Node>
         {
-            public Vector3 location;
-            public Node    parent;
-            public int     depth;
-            public float   f, g, h;
+            public int   location;
+            public Node  parent;
+            public int   depth;
+            public float f, g, h;
 
-            public Node(Vector3 l, Node p)
+            public Node(int l, Node p)
             {
                 location = l;
                 parent   = p;
@@ -27,18 +27,27 @@ namespace Roads
 
             public int Compare(Node x, Node y)
             {
-                return x.f == y.f ? 0 : x.f > y.f ? 1 : -1;
+                return x.CompareTo(y);
+            }
+
+            public int CompareTo(Node other)
+            {
+                return f.CompareTo(other.f);
             }
         }
 
-        private Graph _graph;
+        private Graph           _graph;
+        private Terrain.Terrain _land;
+        private WeightCalculator _calc;
 
-        public RoadTracer(Graph graph)
+        public RoadTracer(Graph graph, Terrain.Terrain land)
         {
             _graph = graph;
+            _land  = land;
+            _calc = new(_graph, _land);
         }
 
-        public List<Vector3> Trace(Vector3 src, Vector3 dest)
+        public List<Vector3> Trace(int src, int dest)
         {
             var sloc = src;
             var tloc = dest;
@@ -62,7 +71,7 @@ namespace Roads
                     var cursor = current;
                     while (cursor != null)
                     {
-                        path.Add(cursor.location);
+                        path.Add(_graph.Position[cursor.location]);
                         cursor = cursor.parent;
                     }
 
@@ -72,25 +81,25 @@ namespace Roads
                 var children = _graph.GetNeighbor(current.location).Select(point => new Node(point, current));
                 foreach (Node child in children)
                 {
-                    if (clist.Find(node => node.location == child.location) != null)
+                    if (clist.Find(node => node.location == child.location) == null)
                     {
                         switch (child.depth)
                         {
                             case 0:
-                                child.g = current.g + WeightCalculator.Weight(child.location);
+                                child.g = current.g + _calc.Weight(child.location);
                                 break;
                             case 1:
-                                child.g = current.g + WeightCalculator.Weight(child.parent.location, child.location);
+                                child.g = current.g + _calc.Weight(child.parent.location, child.location);
                                 break;
                             default:
-                                child.g = current.g + WeightCalculator.Weight(child.parent.parent.location, child.parent.location, child.location);
+                                child.g = current.g + _calc.Weight(child.parent.parent.location, child.parent.location, child.location);
                                 break;
                         }
-                        child.h = Vector3.Distance(child.location, tloc);
+                        child.h = Vector3.Distance(_graph.Position[child.location], _graph.Position[tloc]);
                         child.f = child.g + child.h;
 
                         var m = olist.FindIndex(node => node.location == child.location);
-                        if (m != -1)
+                        if (m >= 0)
                         {
                             if (child.g < olist[m].g)
                                 olist[m] = child;
@@ -102,7 +111,6 @@ namespace Roads
                     }
                 }
             }
-
             throw new Exception("Unable to find a path.");
         }
     }
