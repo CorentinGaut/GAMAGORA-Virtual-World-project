@@ -75,7 +75,7 @@ namespace Terrain
                 for (int j = 0; j < ny; j++)
                 for (int i = 0; i < nx; i++)
                 {
-
+                    float distancePlane = Vector3.Distance(planeCenter, new Vector3(i, 0, j));
                     Vector3 currentPoint = PointInWorld(j * nx + i);
                     float distance = Vector3.Distance(currentPoint, centerPoint);
                         
@@ -84,13 +84,13 @@ namespace Terrain
                     if (ratio < 0)
                         ratio = 0;
 
-                    float distance = Vector3.Distance(planeCenter, new Vector3(i, 0, j));
-                    if (distance < planeInnerRadius)
+                    
+                    if (distancePlane < planeInnerRadius)
                         data[j * nx + i] = 0.0f;
-                    else if (distance < planeOuterRadius)
+                    else if (distancePlane < planeOuterRadius)
                     {
                         data[j * nx + i] = Mathf.Lerp(0.0f, (noise.GetNoise(i, j) + 1f) * .5f * ratio,
-                            planeSmoothFunction((distance - planeInnerRadius)/(planeOuterRadius - planeInnerRadius), planeInterpolationK));
+                            planeSmoothFunction((distancePlane - planeInnerRadius)/(planeOuterRadius - planeInnerRadius), planeInterpolationK));
                     }
                     else
                         data[j * nx + i] = (noise.GetNoise(i, j) + 1f) * .5f * ratio;
@@ -106,20 +106,18 @@ namespace Terrain
                 for (int j = 0; j < ny; j++)
                 for (int i = 0; i < nx; i++)
                 {
+                    float distancePlane = Vector3.Distance(planeCenter, new Vector3(i, 0, j));
                     Vector3 mountainPoint = PointInWorld(indexYmaxSloap * nx + indexXmaxSloap);
                     Vector3 currentPoint = PointInWorld(j * nx + i);
                     float distance = Vector3.Distance(currentPoint, mountainPoint);
                     float ratio = 1 - (distance / mountainScale);
 
-                    
-
-                    float distance = Vector3.Distance(planeCenter, new Vector3(i, 0, j));
-                    if (distance < planeInnerRadius)
+                    if (distancePlane < planeInnerRadius)
                         data[j * nx + i] = 0.0f;
-                    else if (distance < planeOuterRadius)
+                    else if (distancePlane < planeOuterRadius)
                     {
-                        data[j * nx + i] = Mathf.Lerp(0.0f, data[j * nx + i] *= ratio * mountainTop;,
-                            planeSmoothFunction((distance - planeInnerRadius)/(planeOuterRadius - planeInnerRadius), planeInterpolationK));
+                        data[j * nx + i] = Mathf.Lerp(0.0f, data[j * nx + i] *= ratio * mountainTop,
+                            planeSmoothFunction((distancePlane - planeInnerRadius)/(planeOuterRadius - planeInnerRadius), planeInterpolationK));
                     }
                     else
                         data[j * nx + i] = data[j * nx + i] *= ratio * mountainTop;
