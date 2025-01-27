@@ -22,3 +22,5 @@ After that, the RoadTracer will begin. It will get the different points for the 
     - If the angle between the last point, the current point and the next point is under 180°
 
 At the end, the BezierRoadGenerator will get the point list on the RoadTracer and will repeatidly do a bezier curve between four points to create the road mesh. For each part of road, it will have two points in common.
+
+![imageRoad.png](./Assets/Images/imageRoad.png)
