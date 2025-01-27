@@ -243,13 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0124f686bbc16d44962d7d21471d864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-  - {x: 0, y: 0, z: 0}
-  - {x: 1, y: 1, z: 0}
-  - {x: 1, y: 1, z: 1}
-  roadSegmentPrefab: {fileID: 2455595988330687639, guid: eef190e3dd0bbdf4dac68c045fdeed72,
-    type: 3}
-  baseResolution: 50
+  roadWidth: 1
+  resolution: 20
+  roadMaterial: {fileID: 2100000, guid: 3560cf7376b62cf4ca84a7c151aad55e, type: 2}
 --- !u!4 &928801502
 Transform:
   m_ObjectHideFlags: 0

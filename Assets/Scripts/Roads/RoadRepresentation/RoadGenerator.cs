@@ -1,17 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadGenerator : MonoBehaviour
+public class BezierRoadGenerator : MonoBehaviour
 {
-    public List<List<Vector3>> pointsList; // List of lists of points to link to create the roads
-    public GameObject roadSegmentPrefab; // Prefab for the road segment 
-    public int bezierResolution = 40; // Detail level of the roads (maybe too much)
+    public List<List<Vector3>> pointsList = new List<List<Vector3>>();
 
-    private GameObject _roadParent; // SO the roads are not all over the place
+    [Header("Road Settings")]
+    public float roadWidth = 1.0f; // Width of the road
+    public int resolution = 20;   // Resolution for Bézier --> probably need to adjust depending on time spent generationg the roads
+
+    [Header("Material Settings")]
+    public Material roadMaterial; // Material for the road
+
+    private GameObject parentRoadObject; // Parent for all road segments
 
     void Start()
     {
-        // !TODO!  Example  only change with the reak data from the astar
+        parentRoadObject = new GameObject("Roads"); // for a cleaner hieracrhy
+
+        // Example !!! final version will need to be called or to call the place where the points lists are
         pointsList = new List<List<Vector3>>
         {
             new List<Vector3>
@@ -19,68 +26,98 @@ public class RoadGenerator : MonoBehaviour
                 new Vector3(0, 0, 0),
                 new Vector3(5, 0, 3),
                 new Vector3(10, 1, 0),
-                new Vector3(15, 1, -3)
+                new Vector3(15, 5, -3)
             },
             new List<Vector3>
             {
-                new Vector3(0, 1, 0),
-                new Vector3(4, 1, 2),
-                new Vector3(8, 2, -1),
-                new Vector3(12, 2, -4)
+                new Vector3(15, 1, -3),
+                new Vector3(20, 1, 0),
+                new Vector3(25, 2, 3),
+                new Vector3(30, 2, 0)
             }
         };
 
-        // Hold all road segments
-        _roadParent = new GameObject("GeneratedRoads");
-
         GenerateRoads();
+        //
     }
 
-    public void GenerateRoads()
+    void GenerateRoads()
     {
-        // Iterate through each sublist of points
-        for (int listIndex = 0; listIndex < pointsList.Count; listIndex++)
+        foreach (var curve in pointsList)
         {
-            List<Vector3> points = pointsList[listIndex];
+            if (curve.Count < 4) continue; // Need 4 points for a Bezier
+            GenerateRoadMesh(curve[0], curve[1], curve[2], curve[3]);
+        }
+    }
 
-            // Create a separate parent for each list (can be removed just clearer)
-            GameObject subRoadParent = new GameObject($"RoadGroup_{listIndex}");
-            subRoadParent.transform.SetParent(_roadParent.transform);
+    void GenerateRoadMesh(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+    {
+        List<Vector3> vertices = new List<Vector3>();
+        List<int> triangles = new List<int>();
+        List<Vector2> uvs = new List<Vector2>();
 
-            for (int i = 0; i < points.Count - 1; i++)
+        for (int i = 0; i <= resolution; i++)
+        {
+            float t = i / (float)resolution;
+
+            // Calculate the current point on the Bézier curve
+            Vector3 centerPoint = CalculateBezierPoint(t, p0, p1, p2, p3);
+
+            // Calculate the direction and perpendicular vector
+            Vector3 forwardDirection = (CalculateBezierPoint(Mathf.Clamp01(t + 0.01f), p0, p1, p2, p3) - centerPoint).normalized;
+            Vector3 perpendicular = Vector3.Cross(forwardDirection, Vector3.up) * roadWidth / 2.0f;
+
+            Vector3 leftPoint = centerPoint - perpendicular;
+            Vector3 rightPoint = centerPoint + perpendicular;
+
+            // Add vertices
+            vertices.Add(leftPoint);
+            vertices.Add(rightPoint);
+
+            // Add UV coordinates
+            float vCoord = t;
+            uvs.Add(new Vector2(0, vCoord)); // Left side of the road   I think/hope
+            uvs.Add(new Vector2(1, vCoord)); // Right side of the road  I think/hope
+
+            // Add triangles
+            if (i > 0)
             {
-                Vector3 p0 = points[i];
-                Vector3 p3 = points[i + 1];
+                int baseIndex = (i - 1) * 2;
 
-                // Control points for Bezier curve 
-                Vector3 p1 = p0 + (points[i + 1] - points[i]).normalized * 2.0f;
-                Vector3 p2 = p3 - (points[i + 1] - points[i]).normalized * 2.0f;
+                // First triangle
+                triangles.Add(baseIndex);
+                triangles.Add(baseIndex + 1);
+                triangles.Add(baseIndex + 2);
 
-                GenerateBezierRoad(p0, p1, p2, p3, subRoadParent); // Generate the road
+                // Second triangle
+                triangles.Add(baseIndex + 1);
+                triangles.Add(baseIndex + 3);
+                triangles.Add(baseIndex + 2);
             }
         }
+
+        // Create the road mesh
+        Mesh roadMesh = new Mesh();
+        roadMesh.vertices = vertices.ToArray();
+        roadMesh.triangles = triangles.ToArray();
+        roadMesh.uv = uvs.ToArray();
+
+        roadMesh.RecalculateNormals();
+
+        // Create a GameObject to hold the road mesh
+        GameObject roadObject = new GameObject("RoadSegment", typeof(MeshFilter), typeof(MeshRenderer));
+        roadObject.GetComponent<MeshFilter>().mesh = roadMesh;
+
+        // Apply the material
+        MeshRenderer renderer = roadObject.GetComponent<MeshRenderer>();        
+        renderer.material = roadMaterial;
+
+
+        roadObject.transform.parent = parentRoadObject.transform;
     }
 
-    void GenerateBezierRoad(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, GameObject parent)
-    {
-        Vector3 previousPoint = CalculateBezierPoint(0, p0, p1, p2, p3);  // maybe stock instead of calculating again 
-
-        for (int j = 1; j <= bezierResolution; j++) // Start from 1 to avoid duplicate points
-        {
-            float t = (float)j / bezierResolution;
-
-            // Calculate the current point on the Bezier curve
-            Vector3 currentPoint = CalculateBezierPoint(t, p0, p1, p2, p3);
-
-            // Create a road segment between the previous point and the current point
-            CreateRoadSegment(previousPoint, currentPoint, parent);
-
-            // Update the previous point
-            previousPoint = currentPoint;
-        }
-    }
-
-    Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+        // Equation for Bézier curve using Bernstein
+        private Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
     {
         float u = 1 - t;
         float tt = t * t;
@@ -88,23 +125,12 @@ public class RoadGenerator : MonoBehaviour
         float uuu = uu * u;
         float ttt = tt * t;
 
-        return uuu * p0 + 3 * uu * t * p1 + 3 * u * tt * p2 + ttt * p3;
-    }
+        // Bernstein polynomials
+        Vector3 point = uuu * p0; // (1-t)^3 * P0
+        point += 3 * uu * t * p1; // 3(1-t)^2 * t * P1
+        point += 3 * u * tt * p2; // 3(1-t) * t^2 * P2
+        point += ttt * p3;        // t^3 * P3
 
-    void CreateRoadSegment(Vector3 start, Vector3 end, GameObject parent)
-    {
-        // Calculate the position and rotation of the road segment
-        Vector3 position = (start + end) / 2;
-        Quaternion rotation = Quaternion.LookRotation(end - start);
-
-        // Instantiate the road segment
-        GameObject roadSegment = Instantiate(roadSegmentPrefab, position, rotation);
-
-        // Scale the road segment to match the distance
-        float distance = Vector3.Distance(start, end);
-        roadSegment.transform.localScale = new Vector3(1, 0.2f, distance);  // Maybe change the parameters depending on the tests
-
-        // Parent the road segment to the provided parent GameObject
-        roadSegment.transform.SetParent(parent.transform);
+        return point;
     }
 }
