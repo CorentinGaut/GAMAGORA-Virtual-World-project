@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Roads
@@ -57,11 +58,18 @@ namespace Roads
 
             while (olist.Count > 0)
             {
-                olist.Sort();
+                int minIndex = 0;
+                for (int i = 1; i < olist.Count; i++)
+                {
+                    if (olist[i].CompareTo(olist[minIndex]) < 0)
+                    {
+                        minIndex = i;
+                    }
+                }
 
-                var current = olist[0];
+                var current = olist[minIndex];
 
-                olist.RemoveAt(0);
+                olist.RemoveAt(minIndex);
                 clist.Add(current);
 
                 if (current.location == tloc)

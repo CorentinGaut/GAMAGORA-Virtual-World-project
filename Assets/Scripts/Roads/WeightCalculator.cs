@@ -11,8 +11,8 @@ namespace Roads
 {
     public class WeightCalculator
     {
-        private const float _slopeLimit = 0.05f;
-        private const float _averageSlopeLimit = 0.05f;
+        private const float _slopeLimit = 0.2f;
+        private const float _averageSlopeLimit = 0.2f;
         private const float _curveLimit = Mathf.PI;
 
         private Graph _graph;
@@ -35,7 +35,7 @@ namespace Roads
             var p1 = _graph.Position[i1];
             var p2 = _graph.Position[i2];
 
-            int x = i2 % _land.NX; // Column
+            /*int x = i2 % _land.NX; // Column
             int z = (int)((float)i2 / (float)_land.NX);
             if (x > 0 && x < _land.NX && z > 0 && z < _land.NY)
             {
@@ -48,7 +48,7 @@ namespace Roads
             else
             {
                 return Mathf.Infinity;
-            }
+            }*/
 
             return Mathf.Abs((p2.y - p1.y) / (p2.x - p1.x));
         }
@@ -57,7 +57,7 @@ namespace Roads
         public float Curvature(Vector3 p1, Vector3 p2, Vector3 p3)
         {
             Vector3 a = new(p1.x - p2.x, p1.y - p2.y, p1.z - p2.z);
-            Vector3 b = new(p1.x - p3.x, p1.y - p3.y, p1.z - p3.z);
+            Vector3 b = new(p2.x - p3.x, p2.y - p3.y, p2.z - p3.z);
             return Mathf.Acos(Vector3.Dot(a, b) / (a.magnitude * b.magnitude));
         }
         
