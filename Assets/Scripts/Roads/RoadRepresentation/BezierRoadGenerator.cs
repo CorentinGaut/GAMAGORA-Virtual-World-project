@@ -1,20 +1,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Roads
+{
 public class BezierRoadGenerator : MonoBehaviour
 {
-    public List<List<Vector3>> pointsList = new List<List<Vector3>>();
+    [SerializeField]
+    private GraphGenerator _gen;
+
+    private RoadTracer _tracer;
+
+    public List<Vector3> pointsList;
 
     [Header("Road Settings")]
     public float roadWidth = 1.0f; // Width of the road
-    public int resolution = 20;   // Resolution for Bézier --> probably need to adjust depending on time spent generationg the roads
+    public int resolution = 20;   // Resolution for Bï¿½zier --> probably need to adjust depending on time spent generationg the roads
 
     [Header("Material Settings")]
     public Material roadMaterial; // Material for the road
 
     private GameObject parentRoadObject; // Parent for all road segments
 
-    void Start()
+    
+    private void Start()
+    {
+        _gen.onGraphFilled.AddListener(OnGraphFilled);
+        parentRoadObject = new GameObject("Roads"); // for a cleaner hieracrhy
+    }
+
+    private void OnDestroy()
+    {
+        if (_gen != null)
+        {
+            _gen.onGraphFilled.RemoveListener(OnGraphFilled);
+        }
+    }
+
+    private void OnGraphFilled()
+    {
+        _tracer = new RoadTracer(_gen.graph, _gen.land);
+
+        pointsList = _tracer.Trace(250, 7455);
+        
+        GenerateRoads();
+    }
+
+    /*void Start()
     {
         parentRoadObject = new GameObject("Roads"); // for a cleaner hieracrhy
 
@@ -39,14 +70,17 @@ public class BezierRoadGenerator : MonoBehaviour
 
         GenerateRoads();
         //
-    }
+    }*/
 
     void GenerateRoads()
     {
-        foreach (var curve in pointsList)
+
+        for (int i = 1; i < pointsList.Count; i += 2)
         {
-            if (curve.Count < 4) continue; // Need 4 points for a Bezier
-            GenerateRoadMesh(curve[0], curve[1], curve[2], curve[3]);
+            if (pointsList.Count - i > 4)
+            {
+                GenerateRoadMesh(pointsList[i - 1], pointsList[i], pointsList[i + 1], pointsList[i + 2]);
+            }
         }
     }
 
@@ -60,7 +94,7 @@ public class BezierRoadGenerator : MonoBehaviour
         {
             float t = i / (float)resolution;
 
-            // Calculate the current point on the Bézier curve
+            // Calculate the current point on the Bï¿½zier curve
             Vector3 centerPoint = CalculateBezierPoint(t, p0, p1, p2, p3);
 
             // Calculate the direction and perpendicular vector
@@ -116,7 +150,7 @@ public class BezierRoadGenerator : MonoBehaviour
         roadObject.transform.parent = parentRoadObject.transform;
     }
 
-        // Equation for Bézier curve using Bernstein
+        // Equation for Bï¿½zier curve using Bernstein
         private Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
     {
         float u = 1 - t;
@@ -133,4 +167,5 @@ public class BezierRoadGenerator : MonoBehaviour
 
         return point;
     }
+}
 }

@@ -656,8 +656,8 @@ MonoBehaviour:
   width: 10
   height: 10
   maxHeight: 1
-  nx: 300
-  ny: 300
+  nx: 100
+  ny: 100
   seed: 1337
   octaves: 8
   lacunarity: 2
@@ -682,6 +682,55 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1507754031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1507754033}
+  - component: {fileID: 1507754032}
+  m_Layer: 0
+  m_Name: BezierRoadGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1507754032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507754031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0124f686bbc16d44962d7d21471d864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gen: {fileID: 386661352}
+  pointsList: []
+  roadWidth: 0.1
+  resolution: 20
+  roadMaterial: {fileID: 2100000, guid: 3560cf7376b62cf4ca84a7c151aad55e, type: 2}
+--- !u!4 &1507754033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507754031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.385429, y: -57.669327, z: 18.49666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -815,3 +864,4 @@ SceneRoots:
   - {fileID: 322885844}
   - {fileID: 386661353}
   - {fileID: 868085817}
+  - {fileID: 1507754033}
