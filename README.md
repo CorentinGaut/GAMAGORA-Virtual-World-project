@@ -37,9 +37,12 @@ Génération procédurale d'une ville en utilisant le L-system : [Ressources](ht
 - **Git master** : [Renaud MACHECOURT-BOURGEOIS](https://itschocapic.github.io/)
 - **Developpers** : [Renaud MACHECOURT-BOURGEOIS](https://itschocapic.github.io/) - Anna SARBIEWSKI - Ivan ROCQUE - Reyane REDJEM
 - **Supports** : Enzo MARTINEZ
+
 Root Sentence : [X]-[X]-[X]-[X]
+
 Rules :
 X -> F[+X]F[-X]FX
 F -> FF[+F][-F]
   -> F[+FF][-FF]
-![alt text](https://github.com/corentinGaut/GAMAGORA-Virtual-World-project/blob/city/image.jpg?raw=true)
+
+![alt text](./image.png)
