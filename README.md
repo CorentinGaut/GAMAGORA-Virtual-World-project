@@ -42,7 +42,9 @@ Root Sentence : [X]-[X]-[X]-[X]
 
 Rules :
 X -> F[+X]F[-X]FX
+
 F -> FF[+F][-F]
-  -> F[+FF][-FF]
+
+F -> F[+FF][-FF]
 
 ![alt text](./image.png)
